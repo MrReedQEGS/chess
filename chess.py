@@ -46,9 +46,9 @@ PLAYER2 = 2
 GAMECOLS = 12
 GAMEROWS = 8
 
-GRID_SIZE_X = 52
-GRID_SIZE_Y = 52
-TOP_LEFT = (26,28)
+GRID_SIZE_X = 53
+GRID_SIZE_Y = 53
+TOP_LEFT = (15,15)
 PIECE_OFFSET_X = 4
 PIECE_OFFSET_Y = 6
 
@@ -263,22 +263,10 @@ def InfoButtonCallback():
 def PutPiecesInStartingPositions():
 
     theGameGrid.BlankTheGrid()
-
-    for i in range(8):
-        someGamePiece = Piece(player1PieceImage,surface,PLAYER1,False)
-        theGameGrid.SetGridItem((9,i),someGamePiece)
         
-    for i in range(4):
-        someGamePiece = Piece(player1PieceImage,surface,PLAYER1,False)
-        theGameGrid.SetGridItem((10,i),someGamePiece)
-        
-    for i in range(4):
-        someGamePiece = Piece(player2PieceImage,surface,PLAYER2,False)
-        theGameGrid.SetGridItem((10,4+i),someGamePiece)
-        
-    for i in range(8):
-        someGamePiece = Piece(player2PieceImage,surface,PLAYER2,False)
-        theGameGrid.SetGridItem((11,i),someGamePiece)
+    #for i in range(8):
+    #    someGamePiece = Piece(player2PieceImage,surface,PLAYER2,False)
+    #    theGameGrid.SetGridItem((11,i),someGamePiece)
         
 ##############################################################################
 # MAIN
@@ -324,10 +312,11 @@ while running:
     currentMousePos = pygame.mouse.get_pos()
     theGameGrid.DrawSelf(currentMousePos)
 
-    # Sprite is 30x40 pixels at location 12,20 in the file...
-    image = chessPiecesImage.image_at((12, 20, 30, 40),colorkey=(0, 0, 0))
-
-    surface.blit(image, (25,25))
+    for i in range(6):
+        image = chessPiecesImage.image_at((5+i*30, 4, 30, 54),colorkey=(0, 0, 0))
+        surface.blit(image, (25+i*GRID_SIZE_X,15))
+        image = chessPiecesImage.image_at((5+i*30, 59, 30, 54),colorkey=(0, 0, 0))
+        surface.blit(image, (25+i*GRID_SIZE_X,15+GRID_SIZE_Y))
        
     if(running):
         gameTimeSurface = my_font.render("Time elapsed : {}".format(gameTime), False, (0, 0, 0))
