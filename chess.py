@@ -9,6 +9,15 @@
 #  Music
 #  https://pixabay.com/music/search/relaxing%20game%20music/
 #
+#  Images
+#
+#  https://opengameart.org/content/chess-pieces-and-board-squares
+#
+#  Spritesheet
+#
+#  https://www.pygame.org/wiki/Spritesheet
+#
+#
 ##############################################################################
 
 ##############################################################################
@@ -16,7 +25,7 @@
 ##############################################################################
 import pygame, random, time
 from pygame.locals import *
-from UsefulClasses import perpetualTimer,MyGameGrid,MyClickableImageButton,Piece
+from UsefulClasses import perpetualTimer,MyGameGrid,MyClickableImageButton,Piece,spritesheet
 
 import tkinter
 from tkinter import messagebox
@@ -25,7 +34,7 @@ from tkinter import messagebox
 # VARIABLES
 ##############################################################################
 
-APP_NAME = "Grid game temmplate"
+APP_NAME = "Chess"
 COPYRIGHT_MESSAGE = "Mark Reed (c) 2024"
 WINDOW_TEXT = APP_NAME + " - " + COPYRIGHT_MESSAGE
 
@@ -70,7 +79,8 @@ COL_WHITE = (255,255,255)
 COL_GREEN = (0,255,0)
 BACK_FILL_COLOUR = COL_WHITE
 
-backImageName = "./images/backgroundGrid.jpg"
+backImageName = "./images/board.png"
+chessPiecesImageName = "./images/chesspieces.png"
 undoImageName = "./images/Undo.jpg"
 undoImageGreyName = "./images/UndoGrey.jpg"
 muteImageName = "./images/Mute.jpg"
@@ -134,7 +144,7 @@ def TurnOffTimers():
 def LoadImages():
     global backImage,undoImage,undoGreyImage,muteImage,muteGreyImage
     global infoImage,infoGreyImage,player1PieceImage,player2PieceImage
-    global eyeImage,eyeGreyImage,restartImage,restartGreyImage
+    global eyeImage,eyeGreyImage,restartImage,restartGreyImage,chessPiecesImage
  
     backImage = pygame.image.load(backImageName).convert()
 
@@ -160,6 +170,11 @@ def LoadImages():
     eyeGreyImage = pygame.image.load(eyeImageGreyName).convert()
     restartImage = pygame.image.load(restartImageName).convert()
     restartGreyImage = pygame.image.load(restartImageGreyName).convert()
+
+    #Load the full chess pieces image...we will chop it up later.
+    #chessPiecesImage = pygame.image.load(chessPiecesImageName).convert(
+    chessPiecesImage = spritesheet(chessPiecesImageName)
+    
 
 def HandleInput(running):
 
@@ -308,6 +323,11 @@ while running:
     ##Draw all pieces that are on the board.
     currentMousePos = pygame.mouse.get_pos()
     theGameGrid.DrawSelf(currentMousePos)
+
+    # Sprite is 30x40 pixels at location 12,20 in the file...
+    image = chessPiecesImage.image_at((12, 20, 30, 40),colorkey=(0, 0, 0))
+
+    surface.blit(image, (25,25))
        
     if(running):
         gameTimeSurface = my_font.render("Time elapsed : {}".format(gameTime), False, (0, 0, 0))
