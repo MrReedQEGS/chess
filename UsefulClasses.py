@@ -219,7 +219,7 @@ class MyGameGrid():
 
         #If there is a dragged piece then draw it at the current mouse pos
         if(self._pieceBeingDragged != None):
-            posToDraw = (currentMousePos[0]-5*self._pieceOffsetX,currentMousePos[1]-3*self._pieceOffsetY)
+            posToDraw = (currentMousePos[0]-self._cellSizeX//4,currentMousePos[1]-self._cellSizeY//2)
             self._pieceBeingDragged.DrawSelf(posToDraw)
 
     def DebugPrintSelf(self):

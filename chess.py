@@ -49,8 +49,8 @@ GAMEROWS = 8
 GRID_SIZE_X = 53
 GRID_SIZE_Y = 53
 TOP_LEFT = (15,15)
-PIECE_OFFSET_X = 4
-PIECE_OFFSET_Y = 6
+PIECE_OFFSET_X = 8
+PIECE_OFFSET_Y = -4
 
 RIGHT_MOUSE_BUTTON = 3
 
@@ -144,7 +144,7 @@ def TurnOffTimers():
 def LoadImages():
     global backImage,undoImage,undoGreyImage,muteImage,muteGreyImage
     global infoImage,infoGreyImage,player1PieceImage,player2PieceImage
-    global eyeImage,eyeGreyImage,restartImage,restartGreyImage,chessPiecesImage
+    global eyeImage,eyeGreyImage,restartImage,restartGreyImage,chessPiecesImage,pieces
  
     backImage = pygame.image.load(backImageName).convert()
 
@@ -174,8 +174,17 @@ def LoadImages():
     #Load the full chess pieces image...we will chop it up later.
     #chessPiecesImage = pygame.image.load(chessPiecesImageName).convert(
     chessPiecesImage = spritesheet(chessPiecesImageName)
-    
 
+    pieces = []
+    for i in range(6):
+        image = chessPiecesImage.image_at((5+i*30, 4, 30, 54),colorkey=(0, 0, 0))
+        pieces.append(image)
+    
+    for i in range(6):
+        image = chessPiecesImage.image_at((5+i*30, 59, 30, 54),colorkey=(0, 0, 0))
+        pieces.append(image)
+    
+    
 def HandleInput(running):
 
     for event in pygame.event.get():
@@ -263,10 +272,46 @@ def InfoButtonCallback():
 def PutPiecesInStartingPositions():
 
     theGameGrid.BlankTheGrid()
-        
-    #for i in range(8):
-    #    someGamePiece = Piece(player2PieceImage,surface,PLAYER2,False)
-    #    theGameGrid.SetGridItem((11,i),someGamePiece)
+
+    #brown pawns
+    for i in range(8):
+        someGamePiece = Piece(pieces[6],surface,PLAYER1,False)
+        theGameGrid.SetGridItem((i,1),someGamePiece)
+
+    #BROWN pieces
+    someGamePiece = Piece(pieces[7],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((1,0),someGamePiece)
+    theGameGrid.SetGridItem((6,0),someGamePiece)
+    someGamePiece = Piece(pieces[8],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((2,0),someGamePiece)
+    theGameGrid.SetGridItem((5,0),someGamePiece)
+    someGamePiece = Piece(pieces[9],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((0,0),someGamePiece)
+    theGameGrid.SetGridItem((7,0),someGamePiece)
+    someGamePiece = Piece(pieces[10],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((4,0),someGamePiece)
+    someGamePiece = Piece(pieces[11],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((3,0),someGamePiece)
+    
+    #white pawns
+    for i in range(8):
+        someGamePiece = Piece(pieces[0],surface,PLAYER2,False)
+        theGameGrid.SetGridItem((i,6),someGamePiece)
+
+    #white pieces
+    someGamePiece = Piece(pieces[1],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((1,7),someGamePiece)
+    theGameGrid.SetGridItem((6,7),someGamePiece)
+    someGamePiece = Piece(pieces[2],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((2,7),someGamePiece)
+    theGameGrid.SetGridItem((5,7),someGamePiece)
+    someGamePiece = Piece(pieces[3],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((0,7),someGamePiece)
+    theGameGrid.SetGridItem((7,7),someGamePiece)
+    someGamePiece = Piece(pieces[4],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((4,7),someGamePiece)
+    someGamePiece = Piece(pieces[5],surface,PLAYER2,False)
+    theGameGrid.SetGridItem((3,7),someGamePiece)
         
 ##############################################################################
 # MAIN
@@ -311,12 +356,6 @@ while running:
     ##Draw all pieces that are on the board.
     currentMousePos = pygame.mouse.get_pos()
     theGameGrid.DrawSelf(currentMousePos)
-
-    for i in range(6):
-        image = chessPiecesImage.image_at((5+i*30, 4, 30, 54),colorkey=(0, 0, 0))
-        surface.blit(image, (25+i*GRID_SIZE_X,15))
-        image = chessPiecesImage.image_at((5+i*30, 59, 30, 54),colorkey=(0, 0, 0))
-        surface.blit(image, (25+i*GRID_SIZE_X,15+GRID_SIZE_Y))
        
     if(running):
         gameTimeSurface = my_font.render("Time elapsed : {}".format(gameTime), False, (0, 0, 0))
