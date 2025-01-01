@@ -152,7 +152,6 @@ def LoadImages():
     global eyeImage,eyeGreyImage,restartImage,restartGreyImage,chessPiecesImage,pieces
  
     backImage = pygame.image.load(backImageName).convert()
- 
     undoImage = pygame.image.load(undoImageName).convert()
     undoGreyImage = pygame.image.load(undoImageGreyName).convert()
     muteImage = pygame.image.load(muteImageName).convert()
