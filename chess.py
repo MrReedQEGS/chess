@@ -102,9 +102,6 @@ eyeImageGreyName = "./images/EyeGrey.jpg"
 restartImageName = "./images/Restart.jpg"
 restartImageGreyName = "./images/RestartGrey.jpg"
 
-player1PieceImageName = "./images/player1Piece.png"
-player2PieceImageName = "./images/player2Piece.png"
-
 PIECE_SIZE = 20
 
 #sounds
@@ -151,23 +148,11 @@ def TurnOffTimers():
 
 def LoadImages():
     global backImage,undoImage,undoGreyImage,muteImage,muteGreyImage
-    global infoImage,infoGreyImage,player1PieceImage,player2PieceImage
+    global infoImage,infoGreyImage
     global eyeImage,eyeGreyImage,restartImage,restartGreyImage,chessPiecesImage,pieces
  
     backImage = pygame.image.load(backImageName).convert()
-
-    #Load an image with a white background and set the white to transparent.
-    #Will only work if the background is all properly white 255,255,255
-    player1PieceImage = pygame.image.load(player1PieceImageName)
-    player1PieceImage = pygame.transform.scale(player1PieceImage, (43, 43))  #change size first before doing alpha things
-    player1PieceImage.set_colorkey((255,255,255))
-    player1PieceImage.convert_alpha()
-
-    player2PieceImage = pygame.image.load(player2PieceImageName)
-    player2PieceImage = pygame.transform.scale(player2PieceImage, (43, 43))  #change size first before doing alpha things
-    player2PieceImage.set_colorkey((255,255,255))
-    player2PieceImage.convert_alpha()
-    
+ 
     undoImage = pygame.image.load(undoImageName).convert()
     undoGreyImage = pygame.image.load(undoImageGreyName).convert()
     muteImage = pygame.image.load(muteImageName).convert()
