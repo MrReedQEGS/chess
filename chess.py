@@ -39,9 +39,20 @@ COPYRIGHT_MESSAGE = "Mark Reed (c) 2024"
 WINDOW_TEXT = APP_NAME + " - " + COPYRIGHT_MESSAGE
 
 #CREATE THE EMPTY GAME GRID OBJECT
-EMPTY_SQUARE = 0
-PLAYER1 = 1
-PLAYER2 = 2
+EMPTY_SQUARE = 13
+PLAYER1_PAWN = 0
+PLAYER1_KNIGHT = 1
+PLAYER1_BISHOP = 2
+PLAYER1_ROOK = 3
+PLAYER1_QUEEN = 4
+PLAYER1_KING = 5
+
+PLAYER2_PAWN = 6
+PLAYER2_KNIGHT = 7
+PLAYER2_BISHOP = 8
+PLAYER2_ROOK = 9
+PLAYER2_QUEEN = 10
+PLAYER2_KING = 11
 
 GAMECOLS = 12
 GAMEROWS = 8
@@ -56,11 +67,11 @@ RIGHT_MOUSE_BUTTON = 3
 
 DEBUG_ON = False
 
-SCREEN_WIDTH = 678
-SCREEN_HEIGHT = 504
+SCREEN_WIDTH = 655
+SCREEN_HEIGHT = 488
 
-BUTTON_X_VALUE = 526
-BUTTON_Y_VALUE  = 472
+BUTTON_X_VALUE = 303
+BUTTON_Y_VALUE  = 455
 BUTTON_WIDTH = 30
 
 gridLinesOn = False
@@ -74,12 +85,11 @@ surface = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 #surface.set_colorkey((255, 255, 255))  #White background sprites should now be transparent background!
 pygame.display.set_caption(WINDOW_TEXT)
 
-COL_BLACK = (0,0,0)
 COL_WHITE = (255,255,255)
 COL_GREEN = (0,255,0)
 BACK_FILL_COLOUR = COL_WHITE
 
-backImageName = "./images/board.png"
+backImageName = "./images/board.jpg"
 chessPiecesImageName = "./images/chesspieces.png"
 undoImageName = "./images/Undo.jpg"
 undoImageGreyName = "./images/UndoGrey.jpg"
@@ -112,8 +122,6 @@ pygame.font.init() # you have to call this at the start,
 my_font = pygame.font.SysFont('Comic Sans MS', 16)
 
 running = True
-
-turn = COL_BLACK
 
 #Timer callbacks
 def OneSecondCallback():
@@ -275,42 +283,42 @@ def PutPiecesInStartingPositions():
 
     #brown pawns
     for i in range(8):
-        someGamePiece = Piece(pieces[6],surface,PLAYER1,False)
+        someGamePiece = Piece(pieces[PLAYER2_PAWN],surface,PLAYER2_PAWN,False)
         theGameGrid.SetGridItem((i,1),someGamePiece)
 
     #BROWN pieces
-    someGamePiece = Piece(pieces[7],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER2_KNIGHT],surface,PLAYER2_KNIGHT,False)
     theGameGrid.SetGridItem((1,0),someGamePiece)
     theGameGrid.SetGridItem((6,0),someGamePiece)
-    someGamePiece = Piece(pieces[8],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER2_BISHOP],surface,PLAYER2_BISHOP,False)
     theGameGrid.SetGridItem((2,0),someGamePiece)
     theGameGrid.SetGridItem((5,0),someGamePiece)
-    someGamePiece = Piece(pieces[9],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER2_ROOK],surface,PLAYER2_ROOK,False)
     theGameGrid.SetGridItem((0,0),someGamePiece)
     theGameGrid.SetGridItem((7,0),someGamePiece)
-    someGamePiece = Piece(pieces[10],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER2_QUEEN],surface,PLAYER2_QUEEN,False)
     theGameGrid.SetGridItem((4,0),someGamePiece)
-    someGamePiece = Piece(pieces[11],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER2_KING],surface,PLAYER2_KING,False)
     theGameGrid.SetGridItem((3,0),someGamePiece)
     
     #white pawns
     for i in range(8):
-        someGamePiece = Piece(pieces[0],surface,PLAYER2,False)
+        someGamePiece = Piece(pieces[PLAYER1_PAWN],surface,PLAYER1_PAWN,False)
         theGameGrid.SetGridItem((i,6),someGamePiece)
 
     #white pieces
-    someGamePiece = Piece(pieces[1],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER1_KNIGHT],surface,PLAYER1_KNIGHT,False)
     theGameGrid.SetGridItem((1,7),someGamePiece)
     theGameGrid.SetGridItem((6,7),someGamePiece)
-    someGamePiece = Piece(pieces[2],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER1_BISHOP],surface,PLAYER1_BISHOP,False)
     theGameGrid.SetGridItem((2,7),someGamePiece)
     theGameGrid.SetGridItem((5,7),someGamePiece)
-    someGamePiece = Piece(pieces[3],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER1_ROOK],surface,PLAYER1_ROOK,False)
     theGameGrid.SetGridItem((0,7),someGamePiece)
     theGameGrid.SetGridItem((7,7),someGamePiece)
-    someGamePiece = Piece(pieces[4],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER1_QUEEN],surface,PLAYER1_QUEEN,False)
     theGameGrid.SetGridItem((4,7),someGamePiece)
-    someGamePiece = Piece(pieces[5],surface,PLAYER2,False)
+    someGamePiece = Piece(pieces[PLAYER1_KING],surface,PLAYER1_KING,False)
     theGameGrid.SetGridItem((3,7),someGamePiece)
         
 ##############################################################################
